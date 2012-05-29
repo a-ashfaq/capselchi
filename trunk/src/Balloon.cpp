@@ -26,7 +26,7 @@ namespace capselchi {
 		world->destroyBody(body);
 	}
 
-	b2Vec2 Balloon::getPösition(){
+	b2Vec2 Balloon::getPosition(){
 		return position;
 	}
 

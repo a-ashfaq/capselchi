@@ -22,7 +22,7 @@ class Balloon : public Actor{
 public:
 	Balloon(World* world, string colorName, float32 x, float32 y, float32 r, b2BodyDef bodyDef);
 	~Balloon();
-	b2Vec2 getPösition();
+	b2Vec2 getPosition();
 	float32 getRadius();
 	b2Body* getBody();
 	string getColor();
