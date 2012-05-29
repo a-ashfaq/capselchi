@@ -13,7 +13,7 @@
 #include "Balloon.hpp"
 #include "Weight.hpp"
 
-using namespace std;
+//using namespace std;
 namespace capselchi {
 
 class World {

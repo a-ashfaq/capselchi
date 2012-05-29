@@ -12,7 +12,7 @@
 #include "Actor.hpp"
 #include <Box2D.h>
 
-using namespace std;
+//using namespace std;
 namespace capselchi {
 class Weight :public Actor{
 public:
