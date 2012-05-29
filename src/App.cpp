@@ -11,6 +11,7 @@
 
 namespace capselchi {
 
+		//TODO game loop
 	int App::run(void) {
 		init();
 		loop();
@@ -51,6 +52,7 @@ namespace capselchi {
 		// Use a timer to control the frame rate.
 		glutTimerFunc(framePeriod, Timer, 0);
 		glutMainLoop();
+
 	}
 
 	void App::loop(void) {
