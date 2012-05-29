@@ -14,7 +14,7 @@ namespace capselchi {
 	State::State(){
 		b2Vec2 gravity;
 		gravity.Set(0.0f, -10.0f);
-		world = new b2World(gravity);
+		//world = new b2World(gravity);
 	}
 
 }  // namespace capselchi

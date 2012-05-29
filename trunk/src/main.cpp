@@ -10,9 +10,9 @@
 
 namespace capselchi {
 
-int main(int argc, char **argv) {
-	App app;
-	app.run();
-}
+//int main(int argc, char **argv) {
+//	App app;
+//	app.run();
+//}
 
 }  // namespace capselchi

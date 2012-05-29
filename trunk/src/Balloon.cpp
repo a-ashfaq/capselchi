@@ -10,7 +10,7 @@
 namespace capselchi {
 
 	Balloon::Balloon(World* world, string colorName, float32 x, float32 y, float32 r, b2BodyDef bodyDef){
-		position = new b2Vec2(x,y);
+		position = b2Vec2(x,y);
 		this->r = r;
 		this->colorName = colorName;
 		bodyDef.userData = this;
