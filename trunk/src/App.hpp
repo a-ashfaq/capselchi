@@ -7,22 +7,76 @@
 
 #ifndef APP_HPP_
 #define APP_HPP_
+#include <GL/freeglut.h>
+#include <GL/glui.h>
+#include <Box2D/Box2D.h>
+
+namespace capselchi {/// Test settings. Some can be controlled in the GUI.
+	struct Settings
+	{
+		Settings() :
+			viewCenter(0.0f, 20.0f),
+			hz(60.0f),
+			velocityIterations(8),
+			positionIterations(3),
+			enableWarmStarting(1),
+			enableContinuous(1),
+			enableSubStepping(0),
+			pause(0),
+			singleStep(0)
+			{}
+
+		b2Vec2 viewCenter;
+		float hz;
+		int velocityIterations;
+		int positionIterations;
+		int enableWarmStarting;
+		int enableContinuous;
+		int enableSubStepping;
+		int pause;
+		int singleStep;
+	};
+
+	class App {
+		public:
+			App();
+			int run(void);
+
+		protected:
+			void init(void);
+			void loop(void);
+			void cleanup(void);
+			static void Resize(int w, int h);
+			static void render();
+			static b2Vec2 ConvertScreenToWorld(int32 x, int32 y);
+			static void Timer(int);
+			static void Keyboard(unsigned char key, int x, int y);
+			static void KeyboardUp(unsigned char key, int x, int y);
+			static void KeyboardSpecial(int key, int x, int y);
+			static void Mouse(int button, int state, int x, int y);
+			static void MouseMotion(int x, int y);
+			static void MouseWheel(int wheel, int direction, int x, int y);
+			static void Restart(int);
+			static void Pause(int);
+			static void Exit(int code);
+			static void SingleStep(int);
 
 
-namespace capselchi {
+		private:
+			Settings settings;
+			int width;
+			int height;
+			int framePeriod;
+			int mainWindow;
+			float settingsHz;
+			GLUI *glui;
+			int tx, ty, tw, th;
+			bool rMouseDown;
+			b2Vec2 lastp;
+	};
 
-class App {
-public:
-	int run(void);
 
-protected:
-	void init(void);
-	void loop(void);
-	void cleanup(void);
 
-private:
-};
-
-}  // namespace capselchi
+} // namespace capselchi
 
 #endif /* APP_HPP_ */
