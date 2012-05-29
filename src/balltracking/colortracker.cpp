@@ -90,7 +90,7 @@ void ColorTracker::detectBallHough(list<Ball*> &balls, Mat &thresholded, Point &
     vector<Vec3f> circles;
     HoughCircles(thresholded, circles, CV_HOUGH_GRADIENT,2,minDist,param1,param2,5,400);
 
-    for(int i=0; i<circles.size(); i++)
+    for(uint i=0; i<circles.size(); i++)
         balls.push_back(new Ball(colorName,
                                  cvRound(circles[i][0])+offset.x,
                                  cvRound(circles[i][1])+offset.y,
@@ -132,15 +132,15 @@ void ColorTracker::detectBallMax(list<Ball*> &balls, Mat &thresholded){
         }
     }
 
-    int x, maxColumnSum = 0;
-    for(int i=0;i<columnSums.size();i++)
+    int x = 0, maxColumnSum = 0;
+    for(uint i=0;i<columnSums.size();i++)
         if (columnSums.at(i) > maxColumnSum){
             x = i;
             maxColumnSum = columnSums.at(i);
         }
 
-    int y, maxRowSum = 0;
-    for(int i=0;i<rowSums.size();i++)
+    int y = 0, maxRowSum = 0;
+    for(uint i=0;i<rowSums.size();i++)
         if (rowSums.at(i) > maxRowSum){
             y = i;
             maxRowSum = rowSums.at(i);

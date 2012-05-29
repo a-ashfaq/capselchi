@@ -44,18 +44,10 @@
 </option>
 <option id="gnu.cpp.link.option.libs.1422928322" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 <listOptionValue builtIn="false" value="opencv_core"/>
+<listOptionValue builtIn="false" value="opencv_features2d"/>
 <listOptionValue builtIn="false" value="Box2D"/>
 <listOptionValue builtIn="false" value="glut"/>
 <listOptionValue builtIn="false" value="glui"/>
-<listOptionValue builtIn="false" value="opencv_imgproc"/>
-<listOptionValue builtIn="false" value="opencv_calib3d"/>
-<listOptionValue builtIn="false" value="opencv_video "/>
-<listOptionValue builtIn="false" value="opencv_features2d"/>
-<listOptionValue builtIn="false" value="opencv_ml"/>
-<listOptionValue builtIn="false" value="opencv_highgui"/>
-<listOptionValue builtIn="false" value="opencv_objdetect"/>
-<listOptionValue builtIn="false" value="opencv_contrib"/>
-<listOptionValue builtIn="false" value="opencv_legacy"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.543883313" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -535,18 +527,10 @@
 </option>
 <option id="gnu.cpp.link.option.libs.1081204760" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 <listOptionValue builtIn="false" value="opencv_core"/>
+<listOptionValue builtIn="false" value="opencv_features2d"/>
 <listOptionValue builtIn="false" value="Box2D"/>
 <listOptionValue builtIn="false" value="glut"/>
 <listOptionValue builtIn="false" value="glui"/>
-<listOptionValue builtIn="false" value="opencv_imgproc"/>
-<listOptionValue builtIn="false" value="opencv_calib3d"/>
-<listOptionValue builtIn="false" value="opencv_video "/>
-<listOptionValue builtIn="false" value="opencv_features2d"/>
-<listOptionValue builtIn="false" value="opencv_ml"/>
-<listOptionValue builtIn="false" value="opencv_highgui"/>
-<listOptionValue builtIn="false" value="opencv_objdetect"/>
-<listOptionValue builtIn="false" value="opencv_contrib"/>
-<listOptionValue builtIn="false" value="opencv_legacy"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.136485666" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>

@@ -11,7 +11,7 @@
 
 namespace capselchi {
 /*
- * @author Bart Bottu, Stefan Diels, Koen Van den Dries
+ * @author Bart Bottu, Stefan Diels, Koen Van den dries
  * This class contains the game state at the start of each level and
  * provides an iterator over game states for each level.
  * use config file for world details.

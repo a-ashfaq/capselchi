@@ -35,7 +35,9 @@ void BallTracker::calibrate(){
     for (list<string>::iterator it = colorNames.begin(); it!=colorNames.end(); it++) {
         ColorTracker* analyzer = new ColorTracker(windowName, *it);
         colorTrackers.push_back(analyzer);
+        cout<<"Calibrating "<<*it<<endl;
         trackBalls(windowName,(*it));
+        cout<<"Finished Calibrating "<<*it<<endl;
     }
 
     cvDestroyWindow(windowName.c_str());
