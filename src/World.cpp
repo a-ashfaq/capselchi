@@ -24,7 +24,7 @@ namespace capselchi {
 		seesaw = world->CreateBody(&seesawDef);
 		//TODO create fixtures with shapes;
 		b2Fixture* baseFixture = base->GetFixtureList();
-		b2PolygonShape* baseShape = (b2PolygonShape*) &baseFixture->GetShape();
+		b2PolygonShape* baseShape = (b2PolygonShape*) baseFixture->GetShape();
 		float32 yCoord= 0;
 		b2Vec2 baseContact;
 		for(int32 index; index<baseShape->GetChildCount(); ++index){
@@ -35,7 +35,7 @@ namespace capselchi {
 			}
 		}
 		b2Fixture* seesawFixture = seesaw->GetFixtureList();
-		b2EdgeShape* seesawShape = (b2EdgeShape*) & seesawFixture->GetShape();
+		b2EdgeShape* seesawShape = (b2EdgeShape*) seesawFixture->GetShape();
 		//TODO joints
 
 	}

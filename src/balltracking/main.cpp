@@ -51,8 +51,8 @@ int main(int argc, char *argv[])
     else
         capture.open(0);
 
-    //capture.set(CV_CAP_PROP_FRAME_WIDTH, 1280);   //Not working in OpenCV 2.1
-    //capture.set(CV_CAP_PROP_FRAME_HEIGHT,960);    //Not working in OpenCV 2.1
+   // capture.set(CV_CAP_PROP_FRAME_WIDTH, 1280);   //Not working in OpenCV 2.1
+    //capture.set(CV_CAP_PROP_FRAME_HEIGHT,720);    //Not working in OpenCV 2.1
 
     list<string> colorNames;
     colorNames.push_back("Yellow");

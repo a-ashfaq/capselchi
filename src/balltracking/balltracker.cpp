@@ -48,6 +48,7 @@ list<Ball*> BallTracker::getBalls(){
 
 list<Ball*> BallTracker::getBalls(Mat &frame){
     capture >> frame;
+
     if(!frame.data)
         cerr << "ERROR: frame is NULL" << endl;
 
@@ -77,7 +78,6 @@ void BallTracker::trackBalls(string windowName,string colorName){
             putText(frame, colorName, Point(10, HEIGHT-10), FONT_HERSHEY_TRIPLEX, 0.5, Scalar(0, 0, 0, 0));
         else
             putText(frame, colorName, Point(10, HEIGHT-10), FONT_HERSHEY_TRIPLEX, 0.5, Scalar(255,255,255,0));
-
         imshow(windowName, frame);
 
         //Breaks when Esc is pressed

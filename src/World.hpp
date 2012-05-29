@@ -8,16 +8,17 @@
 #ifndef WORLD_HPP_
 #define WORLD_HPP_
 
-#include <Box2D.h>
+#include <Box2D/Box2D.h>
 #include <list>
 #include "Balloon.hpp"
 #include "Weight.hpp"
 
-//using namespace std;
+using namespace std;
 namespace capselchi {
-
+class Balloon;
+class Weight;
 class World {
-public:
+	public:
 	World(void);
 	~World(void);
 	void createBall(Balloon* balloon);
@@ -29,7 +30,7 @@ public:
 	void removeBall(Balloon* balloon);
 	void destroyBody(b2Body* body);
 
-private:
+	private:
 	b2World* world;
 	list<b2Body*> ballBodys;
 	list<Balloon*> balloons;
@@ -38,8 +39,7 @@ private:
 	b2Body* seesaw;
 };
 
-}  // namespace capselchi
-
+} // namespace capselchi
 
 
 #endif /* WORLD_HPP_ */

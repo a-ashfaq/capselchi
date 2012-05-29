@@ -9,7 +9,7 @@
 #define APP_HPP_
 
 #include "balltracking/balltracker.h"
-#include <Box2D.h>
+#include "State.hpp"
 #include <GL/freeglut.h>
 #include <GL/glui.h>
 #include <Box2D/Box2D.h>
@@ -50,9 +50,6 @@ namespace capselchi {/// Test settings. Some can be controlled in the GUI.
  * processes user input in the form of a BallTracker.
  */
 		protected:
-			void init(void);
-			void loop(void);
-			void cleanup(void);
 			static void Resize(int w, int h);
 			static void render();
 			static b2Vec2 ConvertScreenToWorld(int32 x, int32 y);
@@ -67,7 +64,6 @@ namespace capselchi {/// Test settings. Some can be controlled in the GUI.
 			static void Pause(int);
 			static void Exit(int code);
 			static void SingleStep(int);
-protected:
 	/*
 	 * Initialize game
 	 */

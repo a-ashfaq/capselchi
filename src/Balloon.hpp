@@ -9,12 +9,15 @@
 #define BALLOON_HPP_
 
 #include <string>
-#include <Box2D.h>
+#include <Box2D/Box2D.h>
 #include "World.hpp"
 #include "Actor.hpp"
 
 using namespace std;
 namespace capselchi {
+
+class World;
+
 /**
  *
  */

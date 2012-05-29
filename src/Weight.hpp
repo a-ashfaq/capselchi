@@ -10,10 +10,13 @@
 
 #include "World.hpp"
 #include "Actor.hpp"
-#include <Box2D.h>
+#include <Box2D/Box2D.h>
 
 //using namespace std;
 namespace capselchi {
+
+	class World;
+
 class Weight :public Actor{
 public:
 	Weight(World* world, b2Vec2 position, float32 weight, b2BodyDef def);
