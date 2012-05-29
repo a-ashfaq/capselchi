@@ -13,7 +13,7 @@ Ball::Ball(string colorName, vector<Vec3f> &circles){
     float sumY = 0.0;
     float sumR = 0.0;
 
-    for (int i = 0; i < circles.size(); i++)
+    for (uint i = 0; i < circles.size(); i++)
     {
         if(i<3){
             sumX += circles[i][0];
