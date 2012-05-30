@@ -42,7 +42,7 @@ void drawBalls(list<Ball*> balls){
     imshow(windowName,frame);
 }
 
-int main(int argc, char *argv[])
+int ma1in2(int argc, char *argv[])
 {
     VideoCapture capture;
 

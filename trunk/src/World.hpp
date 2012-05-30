@@ -10,6 +10,7 @@
 
 #include "main.h"
 #include <list>
+#include <map>
 #include "Balloon.hpp"
 #include "Weight.hpp"
 #include "Body.h"
@@ -20,25 +21,29 @@ namespace capselchi {
 	class Weight;
 	class World {
 		public:
-			World(void);
+			World(Settings* settings);
 			~World(void);
 			void createBall(Balloon* balloon);
 			void createWeight(Weight* weight);
-			Body* getBall(int index);
+			Balloon* getBall(string color);
 			Body* getWeight(int index);
 			void reset(void);
 			Body* createBody(b2BodyDef* def);
 			void removeBall(Balloon* balloon);
 			void destroyBody(Body* body);
+			list<Body*> getBodyList();
+			b2World* getWorld();
 
 		private:
 			b2World* world;
 			list<Body*> ballBodies;
-			list<Balloon*> balloons;
+			map<string,Balloon*> balloons;
 			list<Body*> weights;
 			Body* base;
 			Body* seesaw;
+			b2RevoluteJoint* joint;
 			list<Body*> bodies;
+			Settings* settings;
 	};
 
 } // namespace capselchi

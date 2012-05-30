@@ -19,6 +19,9 @@ namespace capselchi {
 	class World;
 
 
+	struct calibPoint{
+			float32 x,y,r;
+	};
 	/**
 	 *
 	 */
@@ -41,6 +44,7 @@ namespace capselchi {
 			float32 weight;
 			Body* seesaw;
 			Fixture* fixture;
+			static calibPoint frontLeft, backRight;
 
 	};
 

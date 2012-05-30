@@ -27,7 +27,7 @@ namespace capselchi {
 				float32 radius = circle->m_radius;
 				b2Vec2 axis = b2Mul(xf.q, b2Vec2(1.0f, 0.0f));
 
-				this->DrawSolidCircle(center, radius, axis, color);
+				DrawSolidCircle(center, radius, axis, color);
 			}
 				break;
 
@@ -35,7 +35,7 @@ namespace capselchi {
 				b2EdgeShape* edge = (b2EdgeShape*) fixture->GetShape();
 				b2Vec2 v1 = b2Mul(xf, edge->m_vertex1);
 				b2Vec2 v2 = b2Mul(xf, edge->m_vertex2);
-				this->DrawSegment(v1, v2, color);
+				DrawSegment(v1, v2, color);
 			}
 				break;
 
@@ -47,8 +47,8 @@ namespace capselchi {
 				b2Vec2 v1 = b2Mul(xf, vertices[0]);
 				for (int32 i = 1; i < count; ++i) {
 					b2Vec2 v2 = b2Mul(xf, vertices[i]);
-					this->DrawSegment(v1, v2, color);
-					this->DrawCircle(v1, 0.05f, color);
+					DrawSegment(v1, v2, color);
+					DrawCircle(v1, 0.05f, color);
 					v1 = v2;
 				}
 			}
@@ -64,7 +64,7 @@ namespace capselchi {
 					vertices[i] = b2Mul(xf, poly->m_vertices[i]);
 				}
 
-				this->DrawSolidPolygon(vertices, vertexCount, color);
+				DrawSolidPolygon(vertices, vertexCount, color);
 			}
 				break;
 
@@ -73,7 +73,7 @@ namespace capselchi {
 		}
 	}
 
-	void Render::DrawDebugData(list<Body*> bodies) {
+	void Render::DrawBodies(list<Body*> bodies) {
 
 		list<Body*>::iterator bIter;
 		for (bIter = bodies.begin(); bIter != bodies.end(); ++bIter) {
