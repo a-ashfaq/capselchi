@@ -60,6 +60,13 @@ namespace capselchi {
 		jdRev.maxMotorTorque = 1e8f;
 		jdRev.enableMotor = !true;
 		joint = (b2RevoluteJoint*) world->CreateJoint(&jdRev);
+
+		b2BodyDef weightDef;
+		weightDef.position = b2Vec2(0.0f,20.0f);
+		this->createWeight(new Weight(this,b2Vec2(5.0f,-6.0f),0,weightDef));
+		weightDef.position = b2Vec2(0.0f,20.0f);
+		this->createWeight(new Weight(this,b2Vec2(-3.0f,-6.0f),0,weightDef));
+		weightDef.position = b2Vec2(0.0f,20.0f);
 	}
 
 	World::~World() {
