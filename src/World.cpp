@@ -46,13 +46,13 @@ namespace capselchi {
 	}
 
 	void World::createBall(Balloon* balloon){
-		ballBodys.push_back(balloon->getBody());
+		ballBodies.push_back(balloon->getBody());
 		balloons.push_back(balloon);
 	}
 
 	void World::removeBall(Balloon* balloon){
 		balloons.remove(balloon);
-		ballBodys.remove(balloon->getBody());
+		ballBodies.remove(balloon->getBody());
 	}
 
 	void World::createWeight(Weight* weight){
