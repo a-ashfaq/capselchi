@@ -71,22 +71,7 @@ namespace capselchi {
 	void App::loop(void) {
 		//TODO game loop
 		// Use a timer to control the frame rate.
-		list<Ball*> balls = ballTracker->getBalls();
-		list<string> colors = world->getColors();
-		for(list<string>::iterator it = colors.begin(); it!=colors.end(); it++){
-			string color = *it;
-			Ball* bal = getBall(balls, color);
-			Balloon* balloon = world->getBall(color);
-			int x = bal->getX();
-			int y = bal->getY();
-			int r = bal->getR();
-			int width = ballTracker->getFrameWidth();
-			int heigth = ballTracker->getFrameHeight();
-			float32 xpos = 1.0*x/width+ width*0.5;
-			float32 ypos = 1.0*y/heigth;
-			float32 radius = r*radiusFactor;
-			balloon->setPosition(xpos, ypos,radius);
-		}
+
 		int32 framePeriod = 1000 / settings->fps;
 		glutTimerFunc(framePeriod, Timer, 0);
 		glutMainLoop();
@@ -212,9 +197,11 @@ namespace capselchi {
 	void App::Timer(int value) {
 		int32 framePeriod = 1000 / settings->fps;
 		glutTimerFunc(framePeriod, Timer, 0);
+		App::scanBalls();
+
+		App::Step();
+		App::Step();
 		glutPostWindowRedisplay(settings->mainWindow);
-		App::Step();
-		App::Step();
 
 	}
 
@@ -284,7 +271,24 @@ namespace capselchi {
 
 	}
 
+	float App::radiusFactor = 1.0f;
 	void App::scanBalls() {
+		list<Ball*> balls = ballTracker->getBalls();
+				list<string> colors = world->getColors();
+				for(list<string>::iterator it = colors.begin(); it!=colors.end(); it++){
+					string color = *it;
+					Ball* bal = getBall(balls, color);
+					Balloon* balloon = world->getBall(color);
+					int x = bal->getX();
+					int y = bal->getY();
+					int r = bal->getR();
+					int width = ballTracker->getFrameWidth();
+					int heigth = ballTracker->getFrameHeight();
+					float32 xpos = 1.0*x/width+ width*0.5;
+					float32 ypos = 1.0*y/heigth;
+					float32 radius = r*radiusFactor;
+					balloon->setPosition(xpos, ypos,radius);
+		}
 
 	}
 
