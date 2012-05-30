@@ -32,7 +32,7 @@ class World {
 
 	private:
 	b2World* world;
-	list<b2Body*> ballBodys;
+	list<b2Body*> ballBodies;
 	list<Balloon*> balloons;
 	list<b2Body*> weights;
 	b2Body* base;
