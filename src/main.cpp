@@ -30,6 +30,16 @@ int main(int argc, char **argv) {
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 	glutSetOption(GLUT_MULTISAMPLE, 8);
 	cout<<settings->mainWindow<<endl;
+	VideoCapture capture;
+	capture.open(0);
+	list<string> colorNames;
+	colorNames.push_back("Yellow");
+	colorNames.push_back("Red");
+
+	App::setBallTracker(new BallTracker(capture,colorNames));
+
+
+
 	App::setWorld(new World(settings));
 	App::run(settings);
 	cout<<"Ending"<<endl;
