@@ -9,7 +9,7 @@
 
 namespace capselchi {
 
-	Weight::Weight(World* world, b2Vec2 position, float32 weight, b2BodyDef def){
+	Weight::Weight(World* world, b2Vec2 position, float32 weight, b2BodyDef def) {
 		this->position = position;
 		this->weight = weight;
 		def.userData = this;
@@ -19,22 +19,22 @@ namespace capselchi {
 		this->world->createWeight(this);
 	}
 
-	Weight::~Weight(){
+	Weight::~Weight() {
 
 	}
 
-	b2Vec2 Weight::getPosition(){
+	b2Vec2 Weight::getPosition() {
 		return position;
 	}
 
-	float32 Weight::getWeight(){
+	float32 Weight::getWeight() {
 		return weight;
 	}
 
-	Body* Weight::getBody(){
+	Body* Weight::getBody() {
 		return body;
 	}
 
-}  // namespace capselchi
+} // namespace capselchi
 
 

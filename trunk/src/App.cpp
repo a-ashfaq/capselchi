@@ -11,7 +11,8 @@
 
 namespace capselchi {
 
-		//TODO game loop
+
+	//TODO game loop
 	int App::run(void) {
 		init();
 		loop();
@@ -25,7 +26,7 @@ namespace capselchi {
 		glutInitWindowSize(width, height);
 		mainWindow = glutCreateWindow("Balance");
 		glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
-		glutSetOption(GLUT_MULTISAMPLE,8);
+		glutSetOption(GLUT_MULTISAMPLE, 8);
 		glutDisplayFunc(render);
 		GLUI_Master.set_glutReshapeFunc(Resize);
 		GLUI_Master.set_glutKeyboardFunc(Keyboard);
@@ -98,31 +99,28 @@ namespace capselchi {
 	void App::MouseWheel(int wheel, int direction, int x, int y) {
 	}
 
-	void App::render(){
+	void App::render() {
 	}
 
-
-
-	void App::Restart(int){
-	   // Resize(width, height);
+	void App::Restart(int) {
+		// Resize(width, height);
 	}
 
-	void App::Pause(int){
+	void App::Pause(int) {
 		//settings.pause = !settings.pause;
 	}
 
-	void App::Exit(int code){
+	void App::Exit(int code) {
 		// TODO: freeglut is not building on OSX
-	#ifdef FREEGLUT
+#ifdef FREEGLUT
 		glutLeaveMainLoop();
-	#endif
+#endif
 		exit(code);
 	}
 
-	void App::SingleStep(int){
+	void App::SingleStep(int) {
 		//settings.pause = 1;
 		//settings.singleStep = 1;
 	}
-
 
 }
