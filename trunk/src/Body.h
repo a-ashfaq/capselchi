@@ -22,12 +22,13 @@ class Body {
 	public:
 		Body();
 		virtual ~Body();
+		b2Body* getBody();
+		list<Fixture*> getFixtures();
 
 
 	private:
 		b2Body* body;
 		list<Fixture*> fixtures;
-		b2Color color;
 
 
 };

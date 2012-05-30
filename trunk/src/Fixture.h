@@ -19,10 +19,14 @@ class Fixture {
 	public:
 		Fixture();
 		virtual ~Fixture();
+		b2Body* getParent();
+		b2Fixture* getFixture();
+		b2Color getColor();
 
 
 	private:
 		b2Body* parentBody;
+		b2Fixture* fixture;
 		b2Color color;
 };
 

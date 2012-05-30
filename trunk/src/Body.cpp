@@ -18,4 +18,12 @@ Body::~Body() {
 	// TODO Auto-generated destructor stub
 }
 
+b2Body *Body::getBody() {
+	return body;
+}
+
+list<Fixture*> Body::getFixtures() {
+	return fixtures;
+}
+
 }
