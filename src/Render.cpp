@@ -79,7 +79,7 @@ void Render::DrawDebugData(list<Body*> bodies) {
 	for (bIter = bodies.begin(); bIter != bodies.end(); ++bIter) {
 		Body* b = *bIter;
 		const b2Transform& xf = b->getBody()->GetTransform();
-		list<Fixture*> fixtures = b->getFixtures();
+		list<Fixture*> fixtures = b->getFixtureList();
 		list<Fixture*>::iterator fIter;
 		for (fIter = fixtures.begin(); fIter != fixtures.end(); ++fIter) {
 			Fixture* f = *fIter;

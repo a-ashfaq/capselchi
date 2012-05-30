@@ -17,7 +17,7 @@ class Body;
 
 class Fixture {
 	public:
-		Fixture();
+		Fixture(b2Fixture* fixture, b2Color color);
 		virtual ~Fixture();
 		b2Body* getParent();
 		b2Fixture* getFixture();
