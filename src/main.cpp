@@ -15,6 +15,7 @@ using namespace std;
 #include <assert.h>
 #include <stddef.h>
 #include "App.hpp"
+#include "main.h"
 
 namespace capselchi {
 

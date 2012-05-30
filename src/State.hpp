@@ -8,6 +8,7 @@
 #ifndef STATE_HPP_
 #define STATE_HPP_
 #include "World.hpp"
+#include "main.h"
 
 namespace capselchi {
 /*

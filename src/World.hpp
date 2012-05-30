@@ -14,6 +14,7 @@
 #include "Weight.hpp"
 #include "Body.h"
 #include "Fixture.h"
+#include "main.h"
 
 using namespace std;
 namespace capselchi {

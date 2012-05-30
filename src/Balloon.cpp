@@ -9,43 +9,44 @@
 #include "Balloon.hpp"
 namespace capselchi {
 
-	Balloon::Balloon(World* world, string colorName, float32 x, float32 y, float32 r, b2BodyDef bodyDef){
-		position = b2Vec2(x,y);
-		this->r = r;
-		this->colorName = colorName;
-		bodyDef.userData = this;
-		bodyDef.type = b2_dynamicBody;
-		this->world = world;
-		this->body = world->createBody(&bodyDef);
-		this->world->createBall(this);
-	}
+Balloon::Balloon(World *world, string colorName, float32 x, float32 y, float32 r, Body *seesaw, b2FixtureDef *fixDef) {
+	this->setPosition(x,y,r);
+	this->colorName = colorName;
+	this->world = world;
+	this->seesaw = seesaw;
+	this->world->createBall(this);
+}
 
-	Balloon::~Balloon(){
-		body->getBody()->SetUserData(NULL);
-		world->removeBall(this);
-		world->destroyBody(body);
-	}
 
-	b2Vec2 Balloon::getPosition(){
-		return position;
-	}
+Balloon::~Balloon() {
+	seesaw->getBody()->SetUserData(NULL);
+	world->removeBall(this);
+	world->destroyBody(seesaw);
+}
 
-	float32 Balloon::getRadius(){
-		return r;
-	}
+float32 Balloon::getPosition() {
+	return position;
+}
 
-	Body* Balloon::getBody(){
-		return body;
-	}
+float32 Balloon::getWeight() {
+	return weight;
+}
 
-	string Balloon::getColor(){
-		return colorName;
-	}
+Body* Balloon::getSeeSaw() {
+	return seesaw;
+}
 
-	int Balloon::isColor(string colorName){
-		return this->colorName.compare(colorName);
-	}
+string Balloon::getColor() {
+	return colorName;
+}
 
-}  // namespace capselchi
+void Balloon::setPosition(float32 x, float32 y, float32 r) {
+}
+
+int Balloon::isColor(string colorName) {
+	return this->colorName.compare(colorName);
+}
+
+} // namespace capselchi
 
 

@@ -24,6 +24,8 @@ namespace capselchi {
 		glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_MULTISAMPLE);
 		glutInitWindowSize(width, height);
 		mainWindow = glutCreateWindow("Balance");
+		glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
+		glutSetOption(GLUT_MULTISAMPLE,8);
 		glutDisplayFunc(render);
 		GLUI_Master.set_glutReshapeFunc(Resize);
 		GLUI_Master.set_glutKeyboardFunc(Keyboard);

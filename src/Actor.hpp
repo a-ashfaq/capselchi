@@ -8,6 +8,7 @@
 #ifndef ACTOR_HPP_
 #define ACTOR_HPP_
 
+#include "main.h"
 namespace capselchi {
 
 class Actor {

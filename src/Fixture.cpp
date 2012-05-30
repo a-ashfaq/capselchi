@@ -27,4 +27,8 @@ b2Fixture *Fixture::getFixture() {
 	return fixture;
 }
 
+b2Color Fixture::getColor() {
+	return color;
+}
+
 }

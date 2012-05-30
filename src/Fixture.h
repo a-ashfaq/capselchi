@@ -10,6 +10,7 @@
 
 #include <Box2D/Box2D.h>
 #include "Body.h"
+#include "main.h"
 
 namespace capselchi {
 

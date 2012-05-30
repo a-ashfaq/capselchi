@@ -8,8 +8,8 @@
 #ifndef BALLOON_HPP_
 #define BALLOON_HPP_
 
+#include "main.h"
 #include <string>
-#include <Box2D/Box2D.h>
 #include "World.hpp"
 #include "Actor.hpp"
 #include "Body.h"
@@ -24,21 +24,24 @@ class World;
  */
 class Balloon : public Actor{
 public:
-	Balloon(World* world, string colorName, float32 x, float32 y, float32 r, b2BodyDef bodyDef);
+	Balloon(World* world, string colorName, float32 x, float32 y, float32 r, Body* seesaw, b2FixtureDef* fixDef);
 	~Balloon();
-	b2Vec2 getPosition();
-	float32 getRadius();
-	Body* getBody();
+	float32 getPosition();
+	float32 getWeight();
+	Body* getSeeSaw();
 	string getColor();
+	void setPosition(float32 x, float32 y, float32 r);
 	int isColor(string colorName);
 	//TODO modify body with modification of position and radius
 
 private:
 	World* world;
 	string colorName;
-	b2Vec2 position;
-	float32 r;
-	Body* body;
+	float32 position;
+	float32 weight;
+	Body* seesaw;
+	Fixture* fixture;
+
 };
 
 }  // namespace capselchi

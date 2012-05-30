@@ -13,7 +13,7 @@ namespace capselchi {
 	World::World(){
 		//TODO initialize seesaw and base
 		b2Vec2 gravity;
-		gravity.Set(0.0f, -10.0f);
+		gravity.Set(0.0f, -settings.gravity);
 		world = new b2World(gravity);
 		b2BodyDef baseDef;
 		baseDef.position.Set(0,0);
@@ -46,15 +46,11 @@ namespace capselchi {
 	}
 
 	void World::createBall(Balloon* balloon){
-		ballBodies.push_back(balloon->getBody());
 		balloons.push_back(balloon);
-		bodies.push_back(balloon->getBody());
 	}
 
 	void World::removeBall(Balloon* balloon){
 		balloons.remove(balloon);
-		ballBodies.remove(balloon->getBody());
-		bodies.remove(balloon->getBody());
 	}
 
 	void World::createWeight(Weight* weight){
@@ -86,6 +82,7 @@ namespace capselchi {
 
 	void World::destroyBody(Body* body){
 		bodies.remove(body);
+		delete body;
 		world->DestroyBody(body->getBody());
 	}
 }  // namespace capselchi
