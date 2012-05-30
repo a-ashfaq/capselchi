@@ -68,10 +68,12 @@ namespace capselchi {
 
 	void World::createBall(Balloon *balloon) {
 		balloons.insert(pair<string, Balloon*> (balloon->getColor(), balloon));
+		colors.push_back(balloon->getColor());
 	}
 
 	void World::removeBall(Balloon *balloon) {
 		balloons.erase(balloon->getColor());
+		colors.remove(balloon->getColor());
 	}
 
 	void World::createWeight(Weight *weight) {
@@ -108,6 +110,10 @@ namespace capselchi {
 
 	b2World *World::getWorld(){
 		return world;
+	}
+
+	list<string> World::getColors(){
+		return colors;
 	}
 
 //TODO initialize seesaw and base

@@ -33,6 +33,7 @@ namespace capselchi {
 			void destroyBody(Body* body);
 			list<Body*> getBodyList();
 			b2World* getWorld();
+			list<string> getColors();
 
 		private:
 			b2World* world;
@@ -44,6 +45,7 @@ namespace capselchi {
 			b2RevoluteJoint* joint;
 			list<Body*> bodies;
 			Settings* settings;
+			list<string> colors;
 	};
 
 } // namespace capselchi
