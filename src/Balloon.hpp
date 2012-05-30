@@ -14,36 +14,36 @@
 #include "Actor.hpp"
 #include "Body.h"
 
-using namespace std;
 namespace capselchi {
 
-class World;
+	class World;
 
-/**
- *
- */
-class Balloon : public Actor{
-public:
-	Balloon(World* world, string colorName, float32 x, float32 y, float32 r, Body* seesaw, b2FixtureDef* fixDef);
-	~Balloon();
-	float32 getPosition();
-	float32 getWeight();
-	Body* getSeeSaw();
-	string getColor();
-	void setPosition(float32 x, float32 y, float32 r);
-	int isColor(string colorName);
-	//TODO modify body with modification of position and radius
 
-private:
-	World* world;
-	string colorName;
-	float32 position;
-	float32 weight;
-	Body* seesaw;
-	Fixture* fixture;
+	/**
+	 *
+	 */
+	class Balloon: public Actor {
+		public:
+			Balloon(World* world, string colorName, float32 x, float32 y, float32 r, Body* seesaw, b2FixtureDef* fixDef);
+			~Balloon();
+			float32 getPosition();
+			float32 getWeight();
+			Body* getSeeSaw();
+			string getColor();
+			void setPosition(float32 x, float32 y, float32 r);
+			int isColor(string colorName);
+			//TODO modify body with modification of position and radius
 
-};
+		private:
+			World* world;
+			string colorName;
+			float32 position;
+			float32 weight;
+			Body* seesaw;
+			Fixture* fixture;
 
-}  // namespace capselchi
+	};
+
+} // namespace capselchi
 
 #endif /* BALLOON_HPP_ */

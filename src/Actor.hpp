@@ -12,13 +12,12 @@
 namespace capselchi {
 
 class Actor {
-public:
+	public:
 
-
-private:
+	private:
 };
 
-}  // namespace capselchi
+} // namespace capselchi
 
 
 #endif /* ACTOR_HPP_ */

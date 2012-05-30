@@ -5,9 +5,7 @@
  *      Author: stefan
  */
 
-
-#include <GL/freeglut.h>
-#include <GL/glui.h>
+#include "main.h"
 
 #include <cstdio>
 using namespace std;
@@ -15,7 +13,6 @@ using namespace std;
 #include <assert.h>
 #include <stddef.h>
 #include "App.hpp"
-#include "main.h"
 
 namespace capselchi {
 
@@ -24,4 +21,4 @@ namespace capselchi {
 //	app.run();
 //}
 
-}  // namespace capselchi
+} // namespace capselchi

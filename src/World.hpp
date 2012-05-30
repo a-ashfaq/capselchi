@@ -8,40 +8,38 @@
 #ifndef WORLD_HPP_
 #define WORLD_HPP_
 
-#include <Box2D/Box2D.h>
+#include "main.h"
 #include <list>
 #include "Balloon.hpp"
 #include "Weight.hpp"
 #include "Body.h"
 #include "Fixture.h"
-#include "main.h"
 
-using namespace std;
 namespace capselchi {
-class Balloon;
-class Weight;
-class World {
-	public:
-	World(void);
-	~World(void);
-	void createBall(Balloon* balloon);
-	void createWeight(Weight* weight);
-	Body* getBall(int index);
-	Body* getWeight(int index);
-	void reset(void);
-	Body* createBody(b2BodyDef* def);
-	void removeBall(Balloon* balloon);
-	void destroyBody(Body* body);
+	class Balloon;
+	class Weight;
+	class World {
+		public:
+			World(void);
+			~World(void);
+			void createBall(Balloon* balloon);
+			void createWeight(Weight* weight);
+			Body* getBall(int index);
+			Body* getWeight(int index);
+			void reset(void);
+			Body* createBody(b2BodyDef* def);
+			void removeBall(Balloon* balloon);
+			void destroyBody(Body* body);
 
-	private:
-	b2World* world;
-	list<Body*> ballBodies;
-	list<Balloon*> balloons;
-	list<Body*> weights;
-	Body* base;
-	Body* seesaw;
-	list<Body*> bodies;
-};
+		private:
+			b2World* world;
+			list<Body*> ballBodies;
+			list<Balloon*> balloons;
+			list<Body*> weights;
+			Body* base;
+			Body* seesaw;
+			list<Body*> bodies;
+	};
 
 } // namespace capselchi
 

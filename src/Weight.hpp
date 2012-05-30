@@ -8,32 +8,30 @@
 #ifndef WEIGHT_HPP_
 #define WEIGHT_HPP_
 
+#include "main.h"
 #include "World.hpp"
 #include "Actor.hpp"
 #include "Body.h"
-#include <Box2D/Box2D.h>
-#include "main.h"
 
-//using namespace std;
 namespace capselchi {
 
 	class World;
 
-class Weight :public Actor{
-public:
-	Weight(World* world, b2Vec2 position, float32 weight, b2BodyDef def);
-	~Weight(void);
-	b2Vec2 getPosition();
-	float32 getWeight();
-	Body* getBody();
+	class Weight: public Actor {
+		public:
+			Weight(World* world, b2Vec2 position, float32 weight, b2BodyDef def);
+			~Weight(void);
+			b2Vec2 getPosition();
+			float32 getWeight();
+			Body* getBody();
 
-private:
-	World* world;
-	b2Vec2 position;
-	float32 weight;
-	Body* body;
-};
+		private:
+			World* world;
+			b2Vec2 position;
+			float32 weight;
+			Body* body;
+	};
 
-}  // namespace capselchi
+} // namespace capselchi
 
 #endif /* WEIGHT_HPP_ */

@@ -9,43 +9,43 @@
 
 namespace capselchi {
 
-Body::Body(b2Body* body) {
-	this->body = body;
-}
-
-Body::~Body() {
-	list<Fixture*> fixtures = this->getFixtureList();
-	list<Fixture*>::iterator fIter;
-	for (fIter = fixtures.begin(); fIter != fixtures.end(); ++fIter) {
-		Fixture* f = *fIter;
-		delete f;
+	Body::Body(b2Body* body) {
+		this->body = body;
 	}
-}
 
-b2Body *Body::getBody() {
-	return body;
-}
+	Body::~Body() {
+		list<Fixture*> fixtures = this->getFixtureList();
+		list<Fixture*>::iterator fIter;
+		for (fIter = fixtures.begin(); fIter != fixtures.end(); ++fIter) {
+			Fixture* f = *fIter;
+			delete f;
+		}
+	}
 
-list<Fixture*> Body::getFixtureList() {
-	return fixtures;
-}
+	b2Body *Body::getBody() {
+		return body;
+	}
 
-Fixture *Body::CreateFixture(b2FixtureDef *fixDef, b2Color color) {
-	Fixture* fixture = new Fixture(body->CreateFixture(fixDef), color);
-	fixtures.push_back(fixture);
-	return fixture;
-}
+	list<Fixture*> Body::getFixtureList() {
+		return fixtures;
+	}
 
-void Body::DestroyFixture(Fixture *fixture) {
-	fixtures.remove(fixture);
-	body->DestroyFixture(fixture->getFixture());
-	delete fixture;
-}
+	Fixture *Body::CreateFixture(b2FixtureDef *fixDef, b2Color color) {
+		Fixture* fixture = new Fixture(body->CreateFixture(fixDef), color);
+		fixtures.push_back(fixture);
+		return fixture;
+	}
 
-Fixture *Body::CreateFixture(b2Shape *shape, float32 density, b2Color color) {
-	Fixture* fixture = new Fixture(body->CreateFixture(shape, density), color);
-	fixtures.push_back(fixture);
-	return fixture;
-}
+	void Body::DestroyFixture(Fixture *fixture) {
+		fixtures.remove(fixture);
+		body->DestroyFixture(fixture->getFixture());
+		delete fixture;
+	}
+
+	Fixture *Body::CreateFixture(b2Shape *shape, float32 density, b2Color color) {
+		Fixture* fixture = new Fixture(body->CreateFixture(shape, density), color);
+		fixtures.push_back(fixture);
+		return fixture;
+	}
 
 }

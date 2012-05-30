@@ -8,28 +8,26 @@
 #ifndef FIXTURE_H_
 #define FIXTURE_H_
 
-#include <Box2D/Box2D.h>
-#include "Body.h"
 #include "main.h"
+#include "Body.h"
 
 namespace capselchi {
 
-class Body;
+	class Body;
 
-class Fixture {
-	public:
-		Fixture(b2Fixture* fixture, b2Color color);
-		virtual ~Fixture();
-		b2Body* getParent();
-		b2Fixture* getFixture();
-		b2Color getColor();
+	class Fixture {
+		public:
+			Fixture(b2Fixture* fixture, b2Color color);
+			virtual ~Fixture();
+			b2Body* getParent();
+			b2Fixture* getFixture();
+			b2Color getColor();
 
-
-	private:
-		b2Body* parentBody;
-		b2Fixture* fixture;
-		b2Color color;
-};
+		private:
+			b2Body* parentBody;
+			b2Fixture* fixture;
+			b2Color color;
+	};
 
 }
 

@@ -9,43 +9,42 @@
 #include "Balloon.hpp"
 namespace capselchi {
 
-Balloon::Balloon(World *world, string colorName, float32 x, float32 y, float32 r, Body *seesaw, b2FixtureDef *fixDef) {
-	this->setPosition(x,y,r);
-	this->colorName = colorName;
-	this->world = world;
-	this->seesaw = seesaw;
-	this->world->createBall(this);
-}
+	Balloon::Balloon(World *world, string colorName, float32 x, float32 y, float32 r, Body *seesaw, b2FixtureDef *fixDef) {
+		this->setPosition(x, y, r);
+		this->colorName = colorName;
+		this->world = world;
+		this->seesaw = seesaw;
+		this->world->createBall(this);
+	}
 
+	Balloon::~Balloon() {
+		seesaw->getBody()->SetUserData(NULL);
+		world->removeBall(this);
+		world->destroyBody(seesaw);
+	}
 
-Balloon::~Balloon() {
-	seesaw->getBody()->SetUserData(NULL);
-	world->removeBall(this);
-	world->destroyBody(seesaw);
-}
+	float32 Balloon::getPosition() {
+		return position;
+	}
 
-float32 Balloon::getPosition() {
-	return position;
-}
+	float32 Balloon::getWeight() {
+		return weight;
+	}
 
-float32 Balloon::getWeight() {
-	return weight;
-}
+	Body* Balloon::getSeeSaw() {
+		return seesaw;
+	}
 
-Body* Balloon::getSeeSaw() {
-	return seesaw;
-}
+	string Balloon::getColor() {
+		return colorName;
+	}
 
-string Balloon::getColor() {
-	return colorName;
-}
+	void Balloon::setPosition(float32 x, float32 y, float32 r) {
+	}
 
-void Balloon::setPosition(float32 x, float32 y, float32 r) {
-}
-
-int Balloon::isColor(string colorName) {
-	return this->colorName.compare(colorName);
-}
+	int Balloon::isColor(string colorName) {
+		return this->colorName.compare(colorName);
+	}
 
 } // namespace capselchi
 
