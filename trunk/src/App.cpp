@@ -268,11 +268,13 @@ namespace capselchi {
 	}
 
 	void App::calibrate() {
+		App::ballTracker->calibrate();
 
 	}
 
 	float App::radiusFactor = 1.0f;
 	void App::scanBalls() {
+
 		list<Ball*> balls = ballTracker->getBalls();
 				list<string> colors = world->getColors();
 				for(list<string>::iterator it = colors.begin(); it!=colors.end(); it++){
