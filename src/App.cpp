@@ -45,6 +45,7 @@ namespace capselchi {
 		hertzSpinner->set_float_limits(5.0f, 200.0f);
 		GLUI_Spinner* fpsSpinner = settings->glui->add_spinner("FPS", GLUI_SPINNER_INT, &(settings->fps));
 		fpsSpinner->set_int_limits(10, 120);
+		settings->glui->add_button("Calibrate", 0, calibrate);
 		settings->glui->add_button("Pause", 0, Pause);
 		settings->glui->add_button("Single Step", 0, SingleStep);
 		settings->glui->add_button("Restart", 0, Restart);
@@ -248,6 +249,14 @@ namespace capselchi {
 		m_world->SetContinuousPhysics(settings->enableContinuous > 0);
 		m_world->SetSubStepping(settings->enableSubStepping > 0);
 		m_world->Step(timeStep, settings->velocityIterations, settings->positionIterations);
+	}
+
+	void App::calibrate() {
+
+	}
+
+	void App::scanBalls() {
+
 	}
 
 }
