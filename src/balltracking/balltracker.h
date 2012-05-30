@@ -44,7 +44,8 @@ public:
 
     //Called by mouseHandler - reset thresholds of current frameanalyzer
     void resetThresholds();
-
+    int getFrameWidth();
+    int getFrameHeight();
 };
 
 #endif
