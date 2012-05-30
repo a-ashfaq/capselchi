@@ -12,6 +12,7 @@
 #include "Actor.hpp"
 #include "Body.h"
 #include <Box2D/Box2D.h>
+#include "main.h"
 
 //using namespace std;
 namespace capselchi {

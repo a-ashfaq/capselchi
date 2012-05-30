@@ -11,6 +11,7 @@
 #include <Box2D/Box2D.h>
 #include <list>
 #include "Fixture.h"
+#include "main.h"
 
 using namespace std;
 

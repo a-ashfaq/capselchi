@@ -8,6 +8,7 @@
 #ifndef APP_HPP_
 #define APP_HPP_
 
+#include "main.h"
 #include "balltracking/balltracker.h"
 #include "State.hpp"
 #include <GL/freeglut.h>
@@ -15,30 +16,6 @@
 #include <Box2D/Box2D.h>
 
 namespace capselchi {/// Test settings. Some can be controlled in the GUI.
-	struct Settings
-	{
-		Settings() :
-			viewCenter(0.0f, 20.0f),
-			hz(60.0f),
-			velocityIterations(8),
-			positionIterations(3),
-			enableWarmStarting(1),
-			enableContinuous(1),
-			enableSubStepping(0),
-			pause(0),
-			singleStep(0)
-			{}
-
-		b2Vec2 viewCenter;
-		float hz;
-		int velocityIterations;
-		int positionIterations;
-		int enableWarmStarting;
-		int enableContinuous;
-		int enableSubStepping;
-		int pause;
-		int singleStep;
-	};
 
 	class App {
 		public:

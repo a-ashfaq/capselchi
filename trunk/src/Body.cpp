@@ -30,16 +30,22 @@ list<Fixture*> Body::getFixtureList() {
 	return fixtures;
 }
 
-    Fixture *Body::CreateFixture(b2FixtureDef *fixDef, b2Color color)
-    {
-    }
+Fixture *Body::CreateFixture(b2FixtureDef *fixDef, b2Color color) {
+	Fixture* fixture = new Fixture(body->CreateFixture(fixDef), color);
+	fixtures.push_back(fixture);
+	return fixture;
+}
 
-    void Body::DestroyFixture(Fixture *fixture)
-    {
-    }
+void Body::DestroyFixture(Fixture *fixture) {
+	fixtures.remove(fixture);
+	body->DestroyFixture(fixture->getFixture());
+	delete fixture;
+}
 
-    Fixture *Body::CreateFixture(b2Shape *fixDef, float32 density, b2Color color)
-    {
-    }
+Fixture *Body::CreateFixture(b2Shape *shape, float32 density, b2Color color) {
+	Fixture* fixture = new Fixture(body->CreateFixture(shape, density), color);
+	fixtures.push_back(fixture);
+	return fixture;
+}
 
 }

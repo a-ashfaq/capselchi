@@ -11,6 +11,7 @@
 #include <Box2D/Box2D.h>
 #include <GL/freeglut.h>
 #include "Body.h"
+#include "main.h"
 
 
 #include <cstdio>
