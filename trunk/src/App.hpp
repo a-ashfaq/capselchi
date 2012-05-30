@@ -44,6 +44,8 @@ namespace capselchi {/// Test settings. Some can be controlled in the GUI.
 			static void setBallTracker(BallTracker* bt);
 			static void setWorld(World* w);
 			static void setState(State* bt);
+			//TODO calibratie van radiusfactor
+			static float32 radiusFactor;
 
 			/*
 			 * Initialize game
@@ -65,6 +67,7 @@ namespace capselchi {/// Test settings. Some can be controlled in the GUI.
 			static World* world;
 			static State* state;
 			static Settings* settings;
+			static Ball* getBall(list<Ball*> balls, string color);
 
 	};
 
