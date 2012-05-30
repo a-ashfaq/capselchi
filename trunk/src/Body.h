@@ -20,10 +20,13 @@ class Fixture;
 
 class Body {
 	public:
-		Body();
+		Body(b2Body* body);
 		virtual ~Body();
 		b2Body* getBody();
-		list<Fixture*> getFixtures();
+		list<Fixture*> getFixtureList();
+		Fixture* CreateFixture(b2FixtureDef* fixDef, b2Color color);
+		Fixture* CreateFixture(b2Shape* fixDef, float32 density, b2Color color);
+		void DestroyFixture(Fixture* fixture);
 
 
 	private:

@@ -12,6 +12,7 @@
 #include <Box2D/Box2D.h>
 #include "World.hpp"
 #include "Actor.hpp"
+#include "Body.h"
 
 using namespace std;
 namespace capselchi {
@@ -27,7 +28,7 @@ public:
 	~Balloon();
 	b2Vec2 getPosition();
 	float32 getRadius();
-	b2Body* getBody();
+	Body* getBody();
 	string getColor();
 	int isColor(string colorName);
 	//TODO modify body with modification of position and radius
@@ -37,7 +38,7 @@ private:
 	string colorName;
 	b2Vec2 position;
 	float32 r;
-	b2Body* body;
+	Body* body;
 };
 
 }  // namespace capselchi

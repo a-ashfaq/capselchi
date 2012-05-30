@@ -16,12 +16,12 @@ namespace capselchi {
 		bodyDef.userData = this;
 		bodyDef.type = b2_dynamicBody;
 		this->world = world;
-		this->body = world->createBody(bodyDef);
+		this->body = world->createBody(&bodyDef);
 		this->world->createBall(this);
 	}
 
 	Balloon::~Balloon(){
-		body->SetUserData(NULL);
+		body->getBody()->SetUserData(NULL);
 		world->removeBall(this);
 		world->destroyBody(body);
 	}
@@ -34,7 +34,7 @@ namespace capselchi {
 		return r;
 	}
 
-	b2Body* Balloon::getBody(){
+	Body* Balloon::getBody(){
 		return body;
 	}
 

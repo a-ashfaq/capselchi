@@ -10,6 +10,7 @@
 
 #include "World.hpp"
 #include "Actor.hpp"
+#include "Body.h"
 #include <Box2D/Box2D.h>
 
 //using namespace std;
@@ -23,13 +24,13 @@ public:
 	~Weight(void);
 	b2Vec2 getPosition();
 	float32 getWeight();
-	b2Body* getBody();
+	Body* getBody();
 
 private:
 	World* world;
 	b2Vec2 position;
 	float32 weight;
-	b2Body* body;
+	Body* body;
 };
 
 }  // namespace capselchi

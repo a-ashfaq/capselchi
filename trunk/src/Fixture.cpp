@@ -9,13 +9,14 @@
 
 namespace capselchi {
 
-Fixture::Fixture() {
-	// TODO Auto-generated constructor stub
-
+Fixture::Fixture(b2Fixture* fixture, b2Color color) {
+	this->fixture = fixture;
+	this->color = color;
 }
 
 Fixture::~Fixture() {
-	// TODO Auto-generated destructor stub
+	fixture = 0;
+	parentBody = 0;
 }
 
 b2Body *Fixture::getParent() {
@@ -24,10 +25,6 @@ b2Body *Fixture::getParent() {
 
 b2Fixture *Fixture::getFixture() {
 	return fixture;
-}
-
-b2Color Fixture::getColor() {
-	return color;
 }
 
 }

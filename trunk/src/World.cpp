@@ -17,14 +17,14 @@ namespace capselchi {
 		world = new b2World(gravity);
 		b2BodyDef baseDef;
 		baseDef.position.Set(0,0);
-		base = world->CreateBody(&baseDef);
+		base = this->createBody(&baseDef);
 		b2BodyDef seesawDef;
 		seesawDef.position.Set(0,1);
 		seesawDef.type = b2_dynamicBody;
-		seesaw = world->CreateBody(&seesawDef);
+		seesaw = this->createBody(&seesawDef);
 		//TODO create fixtures with shapes;
-		b2Fixture* baseFixture = base->GetFixtureList();
-		b2PolygonShape* baseShape = (b2PolygonShape*) baseFixture->GetShape();
+		Fixture* baseFixture = base->getFixtureList().front();
+		b2PolygonShape* baseShape = (b2PolygonShape*) baseFixture->getFixture()->GetShape();
 		float32 yCoord= 0;
 		b2Vec2 baseContact;
 		for(int32 index; index<baseShape->GetChildCount(); ++index){
@@ -34,8 +34,8 @@ namespace capselchi {
 				baseContact = vertex;
 			}
 		}
-		b2Fixture* seesawFixture = seesaw->GetFixtureList();
-		b2EdgeShape* seesawShape = (b2EdgeShape*) seesawFixture->GetShape();
+		Fixture* seesawFixture = seesaw->getFixtureList().front();
+		b2EdgeShape* seesawShape = (b2EdgeShape*) seesawFixture->getFixture()->GetShape();
 		//TODO joints
 
 	}
@@ -48,24 +48,27 @@ namespace capselchi {
 	void World::createBall(Balloon* balloon){
 		ballBodies.push_back(balloon->getBody());
 		balloons.push_back(balloon);
+		bodies.push_back(balloon->getBody());
 	}
 
 	void World::removeBall(Balloon* balloon){
 		balloons.remove(balloon);
 		ballBodies.remove(balloon->getBody());
+		bodies.remove(balloon->getBody());
 	}
 
 	void World::createWeight(Weight* weight){
 		weights.push_back(weight->getBody());
+		bodies.push_back(weight->getBody());
 		//TODO fixture & joint
 	}
 
-	b2Body* World::getBall(int index){
+	Body* World::getBall(int index){
 		//TODO get the ball at index location;
 		return NULL;
 	}
 
-	b2Body* World::getWeight(int index){
+	Body* World::getWeight(int index){
 		//TODO get weight at index location
 		return NULL;
 	}
@@ -75,12 +78,15 @@ namespace capselchi {
 
 	}
 
-	b2Body* World::createBody(b2BodyDef def){
-		return world->CreateBody(&def);
+	Body* World::createBody(b2BodyDef* def){
+		Body* body = new Body(world->CreateBody(def));
+		bodies.push_back(body);
+		return body;
 	}
 
-	void World::destroyBody(b2Body* body){
-		world->DestroyBody(body);
+	void World::destroyBody(Body* body){
+		bodies.remove(body);
+		world->DestroyBody(body->getBody());
 	}
 }  // namespace capselchi
 

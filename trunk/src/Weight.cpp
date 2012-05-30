@@ -15,7 +15,7 @@ namespace capselchi {
 		def.userData = this;
 		def.type = b2_dynamicBody;
 		this->world = world;
-		this->body = world->createBody(def);
+		this->body = world->createBody(&def);
 		this->world->createWeight(this);
 	}
 
@@ -31,7 +31,7 @@ namespace capselchi {
 		return weight;
 	}
 
-	b2Body* Weight::getBody(){
+	Body* Weight::getBody(){
 		return body;
 	}
 
