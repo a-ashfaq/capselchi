@@ -38,6 +38,8 @@ namespace capselchi {/// Test settings. Some can be controlled in the GUI.
 			static void Exit(int code);
 			static void SingleStep(int);
 			static void Step();
+			static void calibrate();
+			static void scanBalls();
 
 			static void setBallTracker(BallTracker* bt);
 			static void setWorld(World* w);
