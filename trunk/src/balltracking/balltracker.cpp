@@ -103,3 +103,11 @@ void BallTracker::drawBallOnFrame(Ball* ball, Mat &frame){
     circle( frame, cvPoint(ball->getX(), ball->getY()), 3, CV_RGB(0,255,0), -1, 8, 0 );
     circle( frame, cvPoint(ball->getX(), ball->getY()), ball->getR(), CV_RGB(255,0,0), 3, 8, 0 );
 }
+
+int BallTracker::getFrameWidth(){
+	return capture.get(CV_CAP_PROP_FRAME_WIDTH);
+}
+
+int BallTracker::getFrameHeight(){
+	return capture.get(CV_CAP_PROP_FRAME_HEIGHT);
+}
