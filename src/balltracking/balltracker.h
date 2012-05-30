@@ -22,7 +22,6 @@ private:
     bool detectNewBall;
     list<Ball*> lastBalls;
 
-    list<Ball*> getBalls(Mat &frame);
     void trackBalls(string windowName, string colorName);
     void drawBallOnFrame(Ball* ball, Mat &frame);
 
@@ -34,6 +33,7 @@ public:
     ~BallTracker();
 
     void calibrate();
+    list<Ball*> getBalls(Mat &frame);
     list<Ball*> getBalls();
 
     //Called by mouseHandler - new value should be added

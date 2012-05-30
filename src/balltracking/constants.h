@@ -3,9 +3,9 @@
 
 const int WIDTH = 640;                      //Width of frame
 const int HEIGHT = 480;                     //Height of frame
-const bool SHOW_DEBUG_WINDOWS = false;       //Show hsv_images or not
-const bool PRINT_FRAME_RATE = false;
-const bool PRINT_HSV_VALUES = false;
+const bool SHOW_DEBUG_WINDOWS = !true;       //Show hsv_images or not
+const bool PRINT_FRAME_RATE = true;
+const bool PRINT_HSV_VALUES = !true;
 
 enum METHOD { HOUGH, MOMENTS, MAX, CONTOURS_MOMENTS, CONTOURS_HOUGH };
 const METHOD CHOSEN_METHOD = CONTOURS_MOMENTS;

@@ -8,83 +8,116 @@
 #include <stddef.h>
 #include "World.hpp"
 
+/* WEIGHT_HPP_ */
+/* WEIGHT_HPP_ */
 namespace capselchi {
-
-	World::World() {
-		//TODO initialize seesaw and base
+	World::World(Settings* settings) {
+		this->settings = settings;
 		b2Vec2 gravity;
-		gravity.Set(0.0f, -settings.gravity);
+		gravity.Set(0.0f, -settings->gravity);
 		world = new b2World(gravity);
 		b2BodyDef baseDef;
 		baseDef.position.Set(0, 0);
+		baseDef.type = b2_staticBody;
 		base = this->createBody(&baseDef);
+		//b2PolygonShape baseShape = b2PolygonShape.
 		b2BodyDef seesawDef;
-		seesawDef.position.Set(0, 1);
+		seesawDef.position.Set(0, 20.f);
 		seesawDef.type = b2_dynamicBody;
 		seesaw = this->createBody(&seesawDef);
-		//TODO create fixtures with shapes;
-		Fixture* baseFixture = base->getFixtureList().front();
-		b2PolygonShape* baseShape = (b2PolygonShape*) baseFixture->getFixture()->GetShape();
-		float32 yCoord = 0;
-		b2Vec2 baseContact;
-		for (int32 index; index < baseShape->GetChildCount(); ++index) {
-			b2Vec2 vertex = baseShape->GetVertex(index);
-			if (vertex.y > yCoord) {
-				yCoord = vertex.y;
-				baseContact = vertex;
-			}
-		}
-		Fixture* seesawFixture = seesaw->getFixtureList().front();
-		b2EdgeShape* seesawShape = (b2EdgeShape*) seesawFixture->getFixture()->GetShape();
-		//TODO joints
+		b2PolygonShape seesawShape;
+		b2FixtureDef seesawFD;
+		b2Color seesawColor = b2Color(0.5f,0.9f,0.1f);
 
+		seesawShape.SetAsBox(0.5f, 3.0f, b2Vec2(20.0f, -5.0f), 0.0);
+		seesawFD.shape = &seesawShape;
+		seesawFD.density = 0.0f;
+		seesawFD.restitution = 0.0f;
+		seesaw->CreateFixture(&seesawFD, seesawColor);
+		seesawShape.SetAsBox(0.5f, 3.0f, b2Vec2(-20.0f, -5.0f), 0.0);
+		seesawFD.shape = &seesawShape;
+		seesawFD.density = 0.0f;
+		seesawFD.restitution = 0.0f;
+		seesaw->CreateFixture(&seesawFD, seesawColor);
+		seesawShape.SetAsBox(20.0f, 0.5f, b2Vec2(0.0f, -3.0f), 0.0);
+		seesawFD.shape = &seesawShape;
+		seesawFD.density = 5.0f;
+		seesawFD.restitution = 0.0f;
+		seesaw->CreateFixture(&seesawFD, seesawColor);
+		seesawShape.SetAsBox(20.0f, 0.5f, b2Vec2(0.0f, -8.0f), 0.0);
+		seesawFD.shape = &seesawShape;
+		seesawFD.density = 5.0f;
+		seesawFD.restitution = 0.0f;
+		seesaw->CreateFixture(&seesawFD, seesawColor);
+
+		b2RevoluteJointDef jdRev;
+		jdRev.bodyA = base->getBody();
+		jdRev.bodyB = seesaw->getBody();
+		jdRev.localAnchorA.Set(0.0f, 20.0f);
+		jdRev.localAnchorB.Set(0.0f, 0.0f);
+		jdRev.referenceAngle = 1.0f;
+		jdRev.motorSpeed = 0.05f * b2_pi;
+		jdRev.maxMotorTorque = 1e8f;
+		jdRev.enableMotor = !true;
+		joint = (b2RevoluteJoint*) world->CreateJoint(&jdRev);
 	}
 
 	World::~World() {
-		//TODO reset and destroy remaining artefacts
 		delete world;
 	}
 
-	void World::createBall(Balloon* balloon) {
-		balloons.push_back(balloon);
+	void World::createBall(Balloon *balloon) {
+		balloons.insert(pair<string, Balloon*> (balloon->getColor(), balloon));
 	}
 
-	void World::removeBall(Balloon* balloon) {
-		balloons.remove(balloon);
+	void World::removeBall(Balloon *balloon) {
+		balloons.erase(balloon->getColor());
 	}
 
-	void World::createWeight(Weight* weight) {
+	void World::createWeight(Weight *weight) {
 		weights.push_back(weight->getBody());
 		bodies.push_back(weight->getBody());
-		//TODO fixture & joint
 	}
 
-	Body* World::getBall(int index) {
-		//TODO get the ball at index location;
-		return NULL;
+	Balloon *World::getBall(string color) {
+		return balloons[color];
 	}
 
-	Body* World::getWeight(int index) {
-		//TODO get weight at index location
+	Body *World::getWeight(int index) {
 		return NULL;
 	}
 
 	void World::reset() {
-		//TODO reset world cleanup old world
-
 	}
 
-	Body* World::createBody(b2BodyDef* def) {
-		Body* body = new Body(world->CreateBody(def));
+	Body *World::createBody(b2BodyDef *def) {
+		Body *body = new Body(world->CreateBody(def));
 		bodies.push_back(body);
 		return body;
 	}
 
-	void World::destroyBody(Body* body) {
+	void World::destroyBody(Body *body) {
 		bodies.remove(body);
 		delete body;
 		world->DestroyBody(body->getBody());
 	}
+
+	list<Body*> World::getBodyList() {
+		return bodies;
+	}
+
+	b2World *World::getWorld(){
+		return world;
+	}
+
+//TODO initialize seesaw and base
+//TODO create fixtures with shapes;
+//TODO joints
+//TODO reset and destroy remaining artefacts
+//TODO fixture & joint
+//TODO get the ball at index location;
+//TODO get weight at index location
+//TODO reset world cleanup old world
 } // namespace capselchi
 
 

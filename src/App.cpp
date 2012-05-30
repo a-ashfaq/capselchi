@@ -8,106 +8,202 @@
 #include <assert.h>
 #include <stddef.h>
 #include "App.hpp"
+#include "Render.h"
 
 namespace capselchi {
 
-
+	Settings* App::settings = NULL;
 	//TODO game loop
-	int App::run(void) {
+	int App::run(Settings* settings) {
+		App::settings = settings;
 		init();
+		cout << "Beginning2" << endl;
 		loop();
+		cout << "Beginning3" << endl;
 		cleanup();
+		cout << "Beginning4" << endl;
 		return 0;
 	}
 
 	void App::init(void) {
-		glutInit(0, 0);
-		glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_MULTISAMPLE);
-		glutInitWindowSize(width, height);
-		mainWindow = glutCreateWindow("Balance");
-		glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
-		glutSetOption(GLUT_MULTISAMPLE, 8);
-		glutDisplayFunc(render);
-		GLUI_Master.set_glutReshapeFunc(Resize);
-		GLUI_Master.set_glutKeyboardFunc(Keyboard);
-		GLUI_Master.set_glutSpecialFunc(KeyboardSpecial);
-		GLUI_Master.set_glutMouseFunc(Mouse);
-		glutMouseWheelFunc(MouseWheel);
-		glutMotionFunc(MouseMotion);
-		glutKeyboardUpFunc(KeyboardUp);
-		glui = GLUI_Master.create_glui_subwindow(mainWindow, GLUI_SUBWINDOW_RIGHT );
-		glui->add_separator();
-		GLUI_Spinner* velocityIterationSpinner = glui->add_spinner("Vel Iters", GLUI_SPINNER_INT, &settings.velocityIterations);
+		cout << settings->mainWindow << endl;
+		glutDisplayFunc(App::render);
+		GLUI_Master.set_glutReshapeFunc(App::Resize);
+		GLUI_Master.set_glutKeyboardFunc(App::Keyboard);
+		//		GLUI_Master.set_glutMouseFunc(Mouse);
+		//		glutMotionFunc(MouseMotion);
+		//		glutKeyboardUpFunc(KeyboardUp);
+		settings->glui = GLUI_Master.create_glui_subwindow(settings->mainWindow, GLUI_SUBWINDOW_RIGHT );
+		settings->glui->add_separator();
+		GLUI_Spinner* velocityIterationSpinner = settings->glui->add_spinner("Vel Iters", GLUI_SPINNER_INT,
+				&(settings->velocityIterations));
 		velocityIterationSpinner->set_int_limits(1, 500);
-		GLUI_Spinner* positionIterationSpinner = glui->add_spinner("Pos Iters", GLUI_SPINNER_INT, &settings.positionIterations);
+		GLUI_Spinner* positionIterationSpinner = settings->glui->add_spinner("Pos Iters", GLUI_SPINNER_INT,
+				&(settings->positionIterations));
 		positionIterationSpinner->set_int_limits(0, 100);
-		GLUI_Spinner* hertzSpinner = glui->add_spinner("Hertz", GLUI_SPINNER_FLOAT, &settingsHz);
+		GLUI_Spinner* hertzSpinner = settings->glui->add_spinner("Hertz", GLUI_SPINNER_FLOAT, &(settings->settingsHz));
 		hertzSpinner->set_float_limits(5.0f, 200.0f);
-		glui->add_checkbox("Warm Starting", &settings.enableWarmStarting);
-		glui->add_checkbox("Time of Impact", &settings.enableContinuous);
-		glui->add_checkbox("Sub-Stepping", &settings.enableSubStepping);
-		glui->add_button("Pause", 0, Pause);
-		glui->add_button("Single Step", 0, SingleStep);
-		glui->add_button("Restart", 0, Restart);
-		glui->add_button("Quit", 0, (GLUI_Update_CB) (Exit));
-		glui->set_main_gfx_window(mainWindow);
+		GLUI_Spinner* fpsSpinner = settings->glui->add_spinner("FPS", GLUI_SPINNER_INT, &(settings->fps));
+		fpsSpinner->set_int_limits(10, 120);
+		settings->glui->add_button("Pause", 0, Pause);
+		settings->glui->add_button("Single Step", 0, SingleStep);
+		settings->glui->add_button("Restart", 0, Restart);
+		settings->glui->add_button("Quit", 0, (GLUI_Update_CB) (Exit));
+		settings->glui->set_main_gfx_window(settings->mainWindow);
 		glEnable(GL_MULTISAMPLE);
-		// Use a timer to control the frame rate.
-		glutTimerFunc(framePeriod, Timer, 0);
-		glutMainLoop();
 
 	}
 
 	void App::loop(void) {
 		//TODO game loop
-	}
-
-	App::App() {
-		width = 640;
-		height = 480;
-		framePeriod = 16;
-		settingsHz = 60.0f;
+		// Use a timer to control the frame rate.
+		int32 framePeriod = 1000 / settings->fps;
+		glutTimerFunc(framePeriod, Timer, 0);
+		glutMainLoop();
 	}
 
 	void App::cleanup(void) {
 	}
 
-	void App::KeyboardSpecial(int key, int x, int y) {
-	}
-
 	void App::Resize(int w, int h) {
+		settings->width = w;
+		settings->height = h;
+
+		GLUI_Master.get_viewport_area(&(settings->tx), &(settings->ty), &(settings->tw), &(settings->th));
+		glViewport(settings->tx, settings->ty, settings->tw, settings->th);
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		float32 ratio = float32(settings->tw) / float32(settings->th);
+
+		b2Vec2 extents(ratio * 25.0f, 25.0f);
+
+		b2Vec2 lower = settings->viewCenter - extents;
+		b2Vec2 upper = settings->viewCenter + extents;
+
+
+		// L/R/B/T
+		gluOrtho2D(lower.x, upper.x, lower.y, upper.y);
 	}
 
-	b2Vec2 App::ConvertScreenToWorld(int32 x, int32 y) {
-	}
+
+	//	b2Vec2 App::ConvertScreenToWorld(int32 x, int32 y) {
+	//		float32 u = x / float32(tw);
+	//			float32 v = (th - y) / float32(th);
+	//
+	//			float32 ratio = float32(tw) / float32(th);
+	//			b2Vec2 extents(ratio * 25.0f, 25.0f);
+	//			extents *= viewZoom;
+	//
+	//			b2Vec2 lower = settings.viewCenter - extents;
+	//			b2Vec2 upper = settings.viewCenter + extents;
+	//
+	//			b2Vec2 p;
+	//			p.x = (1.0f - u) * lower.x + u * upper.x;
+	//			p.y = (1.0f - v) * lower.y + v * upper.y;
+	//			return p;
+	//	}
 
 	void App::Keyboard(unsigned char key, int x, int y) {
+		B2_NOT_USED(x);
+		B2_NOT_USED(y);
+
+		switch (key) {
+			case 27:
+#ifndef __APPLE__
+				// freeglut specific function
+				glutLeaveMainLoop();
+#endif
+				exit(0);
+				break;
+
+			case 'p':
+				settings->pause = !settings->pause;
+				break;
+		}
 	}
 
-	void App::Mouse(int button, int state, int x, int y) {
-	}
+
+	//	void App::Mouse(int button, int state, int x, int y) {
+	//		// Use the mouse to move things around.
+	//		if (button == GLUT_LEFT_BUTTON)
+	//		{
+	//			int mod = glutGetModifiers();
+	//			b2Vec2 p = ConvertScreenToWorld(x, y);
+	//			if (state == GLUT_DOWN)
+	//			{
+	//				b2Vec2 p = ConvertScreenToWorld(x, y);
+	//				if (mod == GLUT_ACTIVE_SHIFT)
+	//				{
+	//					test->ShiftMouseDown(p);
+	//				}
+	//				else
+	//				{
+	//					test->MouseDown(p);
+	//				}
+	//			}
+	//
+	//			if (state == GLUT_UP)
+	//			{
+	//				test->MouseUp(p);
+	//			}
+	//		}
+	//		else if (button == GLUT_RIGHT_BUTTON)
+	//		{
+	//			if (state == GLUT_DOWN)
+	//			{
+	//				lastp = ConvertScreenToWorld(x, y);
+	//				rMouseDown = true;
+	//			}
+	//
+	//			if (state == GLUT_UP)
+	//			{
+	//				rMouseDown = false;
+	//			}
+	//		}
+	//	}
+
+
+	//	void App::MouseMotion(int32 x, int32 y)
+	//	{
+	//		b2Vec2 p = ConvertScreenToWorld(x, y);
+	//		test->MouseMove(p);
+	//
+	//		if (rMouseDown)
+	//		{
+	//			b2Vec2 diff = p - lastp;
+	//			settings.viewCenter.x -= diff.x;
+	//			settings.viewCenter.y -= diff.y;
+	//			Resize(width, height);
+	//			lastp = ConvertScreenToWorld(x, y);
+	//		}
+	//	}
 
 	void App::Timer(int value) {
-	}
+		int32 framePeriod = 1000 / settings->fps;
+		glutTimerFunc(framePeriod, Timer, 0);
+		glutPostWindowRedisplay(settings->mainWindow);
+		App::Step();
+		App::Step();
 
-	void App::MouseMotion(int x, int y) {
-	}
-
-	void App::KeyboardUp(unsigned char key, int x, int y) {
-	}
-
-	void App::MouseWheel(int wheel, int direction, int x, int y) {
 	}
 
 	void App::render() {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		Render::DrawBodies(world->getBodyList());
+
+		glutSwapBuffers();
 	}
 
 	void App::Restart(int) {
-		// Resize(width, height);
+		Resize(settings->width, settings->height);
 	}
 
 	void App::Pause(int) {
-		//settings.pause = !settings.pause;
+		settings->pause = !settings->pause;
 	}
 
 	void App::Exit(int code) {
@@ -119,8 +215,39 @@ namespace capselchi {
 	}
 
 	void App::SingleStep(int) {
-		//settings.pause = 1;
-		//settings.singleStep = 1;
+		settings->pause = 1;
+		settings->singleStep = 1;
+	}
+
+	BallTracker *App::ballTracker = NULL;
+	World* App::world = NULL;
+	State* App::state = NULL;
+
+	void App::setBallTracker(BallTracker* bt) {
+		ballTracker = bt;
+	}
+	void App::setWorld(World* w) {
+		world = w;
+	}
+	void App::setState(State* bt) {
+		state = bt;
+	}
+
+	void App::Step() {
+		float32 timeStep = settings->settingsHz > 0.0f ? 1.0f / settings->settingsHz : float32(0.0f);
+
+		if (settings->pause) {
+			if (settings->singleStep) {
+				settings->singleStep = 0;
+			} else {
+				timeStep = 0.0f;
+			}
+		}
+		b2World* m_world = world->getWorld();
+		m_world->SetWarmStarting(settings->enableWarmStarting > 0);
+		m_world->SetContinuousPhysics(settings->enableContinuous > 0);
+		m_world->SetSubStepping(settings->enableSubStepping > 0);
+		m_world->Step(timeStep, settings->velocityIterations, settings->positionIterations);
 	}
 
 }
